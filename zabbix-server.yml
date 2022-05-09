@@ -1,4 +1,4 @@
 ---
-- hosts: zabbix
+- hosts: zabbix_server
   roles:
     - zabbix-server

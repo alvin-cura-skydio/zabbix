@@ -17,12 +17,57 @@
   become: true
   when: ansible_distribution == 'Ubuntu'
 
+- name: Remove ca-certificates for reinstallation
+  apt:
+    name: ca-certificates
+    state: absent
+
+- name: Reinstall ca-certificates
+  apt:
+    name: ca-certificates
+    update_cache: yes
+    state: present
+
 - name: Install Maria DB Server
   apt:
     name:
+      - gpg
       - mariadb-server
     state: latest
     install_recommends: yes
     update_cache: yes
   become: true
   when: ansible_distribution == 'Ubuntu'
+
+- name: Check for Zabbix release package
+  command: dpkg-query -W zabbix-release
+  register: zabbix_check_deb
+  failed_when: zabbix_check_deb.rc > 1
+  changed_when: zabbix_check_deb.rc == 1
+
+- name: Retrieve Zabbix release package
+  get_url:
+    url: https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-1+ubuntu20.04_all.deb
+    dest: /tmp/zabbix-release_6.0-1+ubuntu20.04_all.deb
+  when: zabbix_check_deb.rc == 1
+
+- name: Install Zabbix release package
+  apt:
+    deb: /tmp/zabbix-release_6.0-1+ubuntu20.04_all.deb
+  when: zabbix_check_deb.rc == 1
+
+- name: Add Zabbix Public Signing Key
+  ansible.builtin.apt_key:
+    url: https://repo.zabbix.com/zabbix-official-repo.key
+    state: present
+
+- name: Install Zabbix DB Support Packages (mysql)
+  apt:
+    name:
+      - zabbix-sql-scripts
+    state: latest
+    install_recommends: yes
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+

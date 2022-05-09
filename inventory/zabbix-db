@@ -1,7 +1,2 @@
-[zabbix-db-01]
+[zabbix_db]
 zabbix-db-01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.241
-
-[zabbix-db-01:vars]
-
-[zabbix-db:children]
-zabbix-db-01

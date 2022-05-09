@@ -17,11 +17,31 @@
   become: true
   when: ansible_distribution == 'Ubuntu'
 
-- name: Install Zabbix Server
+- name: Remove ca-certificates for reinstallation
+  apt:
+    name: ca-certificates
+    state: absent
+
+- name: Reinstall ca-certificates
+  apt:
+    name: ca-certificates
+    update_cache: yes
+    state: present
+
+- name: Remove Zabbix Server Support Packages (apache2)
   apt:
     name:
       - apache2
       - libapache2-mod-php
+      - zabbix-sql-scripts
+    state: absent
+    purge: yes
+    autoremove: yes
+
+- name: Install Zabbix Server Support Packages (nginx)
+  apt:
+    name:
+      - nginx
       - php
       - php-mbstring
       - php-gd
@@ -37,3 +57,39 @@
     update_cache: yes
   become: true
   when: ansible_distribution == 'Ubuntu'
+
+- name: Check for Zabbix release package
+  command: dpkg-query -W zabbix-release
+  register: zabbix_check_deb
+  failed_when: zabbix_check_deb.rc > 1
+  changed_when: zabbix_check_deb.rc == 1
+
+- name: Retrieve Zabbix release package
+  get_url:
+    url: https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-1+ubuntu20.04_all.deb
+    dest: /tmp/zabbix-release_6.0-1+ubuntu20.04_all.deb
+  when: zabbix_check_deb.rc == 1
+
+- name: Install Zabbix release package
+  apt:
+    deb: /tmp/zabbix-release_6.0-1+ubuntu20.04_all.deb
+  when: zabbix_check_deb.rc == 1
+
+- name: Add Zabbix Public Signing Key
+  ansible.builtin.apt_key:
+    url: https://repo.zabbix.com/zabbix-official-repo.key
+    state: present
+
+- name: Install Zabbix server packages
+  apt:
+    name:
+      - zabbix-server-mysql
+      - zabbix-frontend-php
+      - zabbix-nginx-conf
+      - zabbix-agent
+    state: latest
+    install_recommends: yes
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
