@@ -1,0 +1,12 @@
+---
+- name: Test playbook
+  hosts:
+    - zabbix
+    - zabbix-db
+  gather_facts: true
+  tasks:
+    - name: Touch test file
+      file:
+        path: /tmp/ansible_test_file
+        state: touch
+        access_time: now

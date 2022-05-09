@@ -1,0 +1,39 @@
+---
+- name: Install NTP prerequisite
+  apt:
+    name: ntp
+    state: latest
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Restart NTP services
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: ntp
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install Zabbix Server
+  apt:
+    name:
+      - apache2
+      - libapache2-mod-php
+      - php
+      - php-mbstring
+      - php-gd
+      - php-xml
+      - php-bcmath
+      - php-ldap
+      - php-mysql
+      - unzip
+      - curl
+      - gnupg2
+    state: latest
+    install_recommends: yes
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'

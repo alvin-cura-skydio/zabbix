@@ -1,0 +1,9 @@
+---
+- name: Show facts for Zabbix servers and support hosts
+  hosts:
+    - zabbix
+    - zabbix-db
+  tasks:
+    - name: Show ansible_facts
+      ansible.builtin.debug:
+        var: ansible_facts

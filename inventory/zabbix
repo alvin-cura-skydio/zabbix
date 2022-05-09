@@ -1,0 +1,7 @@
+[zabbix-01]
+zabbix-01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.231
+
+[zabbix-01:vars]
+
+[zabbix:children]
+zabbix-01

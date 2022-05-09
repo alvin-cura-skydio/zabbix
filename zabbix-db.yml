@@ -1,0 +1,4 @@
+---
+- hosts: zabbix-db
+  roles:
+    - mariadb

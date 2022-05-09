@@ -1,0 +1,9 @@
+---
+- name: Enable sudo group without password
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "^%sudo"
+    line: "%sudo   ALL=(ALL) NOPASSWD: ALL"
+    validate: "visudo -cf %s"
+  become: true
