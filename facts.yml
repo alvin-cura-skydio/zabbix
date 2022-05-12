@@ -1,8 +1,8 @@
 ---
 - name: Show facts for Zabbix servers and support hosts
   hosts:
-    - zabbix
-    - zabbix-db
+    - zabbix_server
+    - zabbix_db
   tasks:
     - name: Show ansible_facts
       ansible.builtin.debug:

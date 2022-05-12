@@ -1,7 +1,9 @@
 ---
-- name: Install NTP prerequisite
+- name: Install prerequisite packages
   apt:
-    name: ntp
+    name:
+      - gpg
+      - ntp
     state: latest
     update_cache: yes
   become: true
@@ -17,16 +19,11 @@
   become: true
   when: ansible_distribution == 'Ubuntu'
 
-- name: Remove ca-certificates for reinstallation
-  apt:
-    name: ca-certificates
-    state: absent
-
-- name: Reinstall ca-certificates
-  apt:
-    name: ca-certificates
-    update_cache: yes
-    state: present
+- name: Check ca-certificates version
+  command: dpkg-query -W ca-certificates | awk '{ print $2 }' | cut -c1-8
+  register: ca_certificates_check_deb
+  failed_when: ca_certificates_check_deb.rc > 1
+  changed_when: ca_certificates_check_deb.rc == 1
 
 - name: Check for Zabbix release package
   command: dpkg-query -W zabbix-release
@@ -50,20 +47,29 @@
     url: https://repo.zabbix.com/zabbix-official-repo.key
     state: present
 
-- name: Configure zabbix_agentd.conf for server access
-  lineinfile:
-    path: /etc/zabbix/zabbix_agentd.conf
-    state: present
-    regexp: "^Server="
-    line: "Server=127.0.0.1,10.100.0.0/16"
+- name: Update sources for Ubuntu 22.04 (jammy)
+  ansible.builtin.replace:
+    path: /etc/apt/sources.list.d/zabbix.list
+    regexp: '(\s+)focal(\s+.*)?$'
+    replace: '\1jammy\2'
   become: true
+  when: 
+    - ansible_distribution == 'Ubuntu' 
+    - ansible_distribution_release == 'jammy' 
 
-- name: Configure zabbix_agentd.conf for active checks
-  lineinfile:
-    path: /etc/zabbix/zabbix_agentd.conf
-    state: present
-    regexp: "^ServerActive="
-    line: "ServerActive=10.100.104.231"
+- name: Install Zabbix agent packages
+  apt:
+    name:
+      - zabbix-agent
+    state: latest
+    install_recommends: yes
+    update_cache: yes
   become: true
+  when: ansible_distribution == 'Ubuntu'
 
-
+- name: Install Zabbix agent template
+  ansible.builtin.template:
+    src: zabbix_agentd.conf.j2
+    dest: /etc/zabbix/zabbix_agentd.conf
+    backup: yes
+  become: true
