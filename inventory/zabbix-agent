@@ -1,3 +1,4 @@
 [zabbix_agent]
+maas-02			ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.222
 maas-db-02		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.251
 zabbix-db-01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.241
