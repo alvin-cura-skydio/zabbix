@@ -86,6 +86,7 @@
       - zabbix-server-mysql
       - zabbix-frontend-php
       - zabbix-nginx-conf
+      - zabbix-get
       - zabbix-agent
     state: latest
     install_recommends: yes
