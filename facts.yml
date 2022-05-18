@@ -1,6 +1,7 @@
 ---
 - name: Show facts for Zabbix servers and support hosts
   hosts:
+    - zabbix_agent
     - zabbix_server
     - zabbix_db
   tasks:

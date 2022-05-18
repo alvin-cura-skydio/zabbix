@@ -1,8 +1,25 @@
 ---
+- name: Set Zabbix Agent defaults by Ubuntu version
+  set_fact:
+    agent: "{{ legacy_ubuntu if ansible_distribution_release == 'bionic' else current_ubuntu }}"
+    #zabbix_agent: "{% if ansible_distribution_release == 'xenial %} legacy_ubuntu {% elif ansible_distribution_release == 'bionic' %} legacy_ubuntu {% else %} current_ubuntu {% endif %}"
+
+- name: Set gpg defaults by Ubuntu version
+  set_fact:
+    gpg: "{{ xenial_gpg if ansible_distribution_version == '16.04' else current_gpg }}"
+
+- name: Install gpg
+  apt:
+    name:
+      - "{{ gpg.package }}"
+    state: latest
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
 - name: Install prerequisite packages
   apt:
     name:
-      - gpg
       - ntp
     state: latest
     update_cache: yes
@@ -24,6 +41,9 @@
   register: ca_certificates_check_deb
   failed_when: ca_certificates_check_deb.rc > 1
   changed_when: ca_certificates_check_deb.rc == 1
+  when:
+    - ansible_distribution_version == '16.04'
+    - ansible_distribution_release == 'jammy'
 
 - name: Check for Zabbix release package
   command: dpkg-query -W zabbix-release

@@ -1,4 +1,7 @@
-# {{ ansible_managed }}
+# {{ ansible_managed }}:  LOCAL CHANGES WILL BE OVERWRITTEN
+# Last run from:  {{ template_host }}
+# Template Path:  {{ template_path }}
+#
 # This is a configuration file for Zabbix agent daemon (Unix)
 # To get more information about Zabbix, visit http://www.zabbix.com
 
@@ -30,7 +33,7 @@ PidFile=/run/zabbix/zabbix_agentd.pid
 # Default:
 # LogFile=
 
-LogFile=/var/log/zabbix-agent/zabbix_agentd.log
+LogFile=/var/log/{{ agent.logpath }}/zabbix_agentd.log
 
 ### Option: LogFileSize
 #	Maximum size of log file in MB.
@@ -314,7 +317,7 @@ ServerActive=10.100.104.231
 # Default:
 # Include=
 
-Include=/etc/zabbix/zabbix_agentd.conf.d/*.conf
+Include=/etc/zabbix/{{ agent.confpath }}/*.conf
 
 # Include=/usr/local/etc/zabbix_agentd.userparams.conf
 # Include=/usr/local/etc/zabbix_agentd.conf.d/

@@ -1,0 +1,16 @@
+---
+
+xenial_gpg:
+  package: gnupg
+
+current_gpg:
+  package: gpg
+
+legacy_ubuntu:
+  confpath: zabbix_agentd.conf.d
+  logpath: zabbix-agent
+
+current_ubuntu:
+  confpath: zabbix_agentd.d
+  logpath: zabbix
+
