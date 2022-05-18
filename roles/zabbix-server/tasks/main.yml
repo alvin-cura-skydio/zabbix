@@ -41,6 +41,7 @@
 - name: Install Zabbix Server Support Packages (nginx)
   apt:
     name:
+      - nmap
       - nginx
       - php
       - php-mbstring
