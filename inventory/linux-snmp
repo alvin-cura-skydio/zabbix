@@ -1,0 +1,2 @@
+[linux_snmp]
+saumyashah-desktop		ansible_connection=ssh		ansible_user=saumyashah

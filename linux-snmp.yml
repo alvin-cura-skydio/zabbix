@@ -1,0 +1,4 @@
+---
+- hosts: linux_snmp
+  roles:
+    - snmp-agent

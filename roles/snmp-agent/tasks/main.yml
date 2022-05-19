@@ -1,0 +1,53 @@
+---
+- name: Set defaults by Ubuntu version
+  set_fact:
+    gpg: "{{ xenial_defaults if ansible_distribution_version == '16.04' else current_defaults }}"
+
+- name: Install prerequisite packages
+  apt:
+    name:
+      - ntp
+    state: latest
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Restart NTP services
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: ntp
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install snmp agent packages
+  apt:
+    name:
+      - snmpd
+    state: latest
+    install_recommends: yes
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install SNMP daemon template for Linux
+  ansible.builtin.template:
+    src: snmpd.conf.j2
+    dest: /etc/snmp/snmpd.conf
+    mode: 0600
+    backup: yes
+  become: true
+  register: snmpd_conf_changed
+
+- name: Restart SNMP services
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: ntp
+  become: true
+  when: snmpd_conf_changed
+

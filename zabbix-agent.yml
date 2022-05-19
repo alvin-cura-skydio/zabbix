@@ -2,3 +2,9 @@
 - hosts: zabbix_agent
   roles:
     - zabbix-agent
+
+- hosts: mysql_servers
+  roles:
+    - zabbix-agent-mysql
+
+

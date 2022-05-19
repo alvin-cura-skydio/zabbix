@@ -53,6 +53,7 @@
       - unzip
       - curl
       - gnupg2
+      - snmp
     state: latest
     install_recommends: yes
     update_cache: yes

@@ -1,0 +1,21 @@
+---
+- name: Set Zabbix Agent defaults by Ubuntu version
+  set_fact:
+    agent: "{{ legacy_ubuntu if ansible_distribution_release == 'bionic' else current_ubuntu }}"
+
+- name: Configure .my.cnf for zabbix user
+  ansible.builtin.template:
+    src: zabbix_my.cnf.j2
+    dest: /var/lib/zabbix/.my.cnf
+    owner: zabbix
+    group: zabbix
+    mode: 0600
+    backup: yes
+  become: true
+
+- name: Install Zabbix agent template for MySQL
+  ansible.builtin.template:
+    src: template_db_mysql.conf.j2
+    dest: "/etc/zabbix/{{ agent.confpath }}/template_db_mysql.conf"
+    backup: yes
+  become: true

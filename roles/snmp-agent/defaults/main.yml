@@ -1,0 +1,11 @@
+---
+xenial_defaults:
+  gpg_package: gnupg
+  confpath: zabbix_agentd.conf.d
+  logpath: zabbix-agent
+
+current_defaults:
+  gpg_package: gpg
+  confpath: zabbix_agentd.d
+  logpath: zabbix
+
