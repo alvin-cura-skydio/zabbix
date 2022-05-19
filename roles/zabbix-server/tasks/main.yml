@@ -54,6 +54,7 @@
       - curl
       - gnupg2
       - snmp
+      - snmp-mibs-downloader
     state: latest
     install_recommends: yes
     update_cache: yes
