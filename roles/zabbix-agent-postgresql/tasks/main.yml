@@ -29,10 +29,11 @@
   blockinfile:
     path: /etc/postgresql/14/main/pg_hba.conf
     insertbefore: "^# \"local\" is for Unix domain socket connections only"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK (zabbix-agent-postgresql)"
     block: |
       host    all             zbx_monitor     127.0.0.1/32            trust
       host    all             zbx_monitor     0.0.0.0/0               md5
       host    all             zbx_monitor     ::0/0                   md5
     backup: yes
   become: true
+  notify: Restart PostgreSQL service
