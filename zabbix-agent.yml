@@ -7,4 +7,7 @@
   roles:
     - zabbix-agent-mysql
 
+- hosts: postgresql_servers
+  roles:
+    - zabbix-agent-postgresql
 
