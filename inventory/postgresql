@@ -1,0 +1,2 @@
+[postgresql_servers]
+maas-db-02		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.251

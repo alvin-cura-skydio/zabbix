@@ -1,0 +1,11 @@
+---
+- name: Set Zabbix Agent defaults by Ubuntu version
+  set_fact:
+    agent: "{{ legacy_ubuntu if ansible_distribution_release == 'bionic' else current_ubuntu }}"
+
+- name: Install Zabbix agent template for PostgreSQL
+  ansible.builtin.template:
+    src: template_db_postgresql.conf.j2
+    dest: "/etc/zabbix/{{ agent.confpath }}/template_db_postgresql.conf"
+    backup: yes
+  become: true
