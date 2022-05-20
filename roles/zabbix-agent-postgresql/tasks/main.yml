@@ -24,3 +24,15 @@
     dest: "/etc/zabbix/{{ agent.confpath }}/template_db_postgresql.conf"
     backup: yes
   become: true
+
+- name: Allow monitoring connetions to PostgreSQL
+  blockinfile:
+    path: /etc/postgresql/14/main/pg_hba.conf
+    insertbefore: "^# \"local\" is for Unix domain socket connections only"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
+    block: |
+      host    all             zbx_monitor     127.0.0.1/32            trust
+      host    all             zbx_monitor     0.0.0.0/0               md5
+      host    all             zbx_monitor     ::0/0                   md5
+    backup: yes
+  become: true
