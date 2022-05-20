@@ -3,6 +3,14 @@
   set_fact:
     agent: "{{ legacy_ubuntu if ansible_distribution_release == 'bionic' else current_ubuntu }}"
 
+- name: Verify zabbix home directory
+  file:
+    path: /var/lib/zabbix
+    state: directory
+    owner: zabbix
+    group: zabbix
+    recurse: yes
+
 - name: Configure .my.cnf for zabbix user
   ansible.builtin.template:
     src: zabbix_my.cnf.j2
