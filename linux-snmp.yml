@@ -1,4 +1,6 @@
 ---
-- hosts: linux_snmp
+- hosts:
+    - linux_snmp_desktops
+    - linux_snmp_servers
   roles:
     - snmp-agent

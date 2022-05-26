@@ -1,2 +1,6 @@
-[linux_snmp]
+[linux_snmp_desktops]
 saumyashah-desktop		ansible_connection=ssh		ansible_user=saumyashah
+rajajain-desktop		ansible_connection=ssh		ansible_user=rajajain
+
+[linux_snmp_servers]
+mfg-logbox			ansible_connection=ssh		ansible_user=aircam
