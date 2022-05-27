@@ -1,6 +1,6 @@
 [zabbix_agent]
 builder6		ansible_connection=ssh		ansible_user=skydio	ansible_host=10.100.25.20
-it-jammy-kvm01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.102
+it-jammy-xen01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.102
 maas-02			ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.222
 maas-db-02		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.251
 mfg-logbox		ansible_connection=ssh		ansible_user=aircam
