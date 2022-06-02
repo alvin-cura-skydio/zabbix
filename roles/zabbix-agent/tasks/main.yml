@@ -36,6 +36,52 @@
   become: true
   when: ansible_distribution == 'Ubuntu'
 
+- name: Check for apparmor
+  command: /usr/sbin/aa-status
+  register: apparmor_check
+  failed_when: apparmor_check.rc > 1
+  changed_when: apparmor_check.rc == 0
+  when:
+    - ansible_distribution == 'Ubuntu'
+
+#- debug:
+#    var: apparmor_check
+
+- name: Install apparmor utilities
+  apt:
+    name:
+      - apparmor-utils
+      - apparmor-notify
+    state: latest
+    update_cache: yes
+  become: true
+  when:
+    - apparmor_check.rc == 0
+
+- name: Install Zabbix agent AppArmor template
+  ansible.builtin.template:
+    src: usr.sbin.zabbix_agentd.j2
+    dest: /etc/apparmor.d/usr.sbin.zabbix_agentd
+    backup: yes
+  become: true
+  when:
+    - apparmor_check.rc == 0
+
+- name: Parse Zabbix agent AppArmor template
+  command: /usr/sbin/apparmor_parser -r /etc/apparmor.d/usr.sbin.zabbix_agentd
+  register: apparmor_parser
+  failed_when: apparmor_parser.rc != 0
+  changed_when: apparmor_parser.rc == 0
+  become: true
+  when:
+    - apparmor_check.rc == 0
+
+- name: Set zabbix_agentd to AppArmor complain mode
+  command: /usr/sbin/aa-complain zabbix_agentd
+  become: true
+  when:
+    - apparmor_parser.rc == 0
+
 - name: Check ca-certificates version
   command: dpkg-query -W ca-certificates | awk '{ print $2 }' | cut -c1-8
   register: ca_certificates_check_deb
