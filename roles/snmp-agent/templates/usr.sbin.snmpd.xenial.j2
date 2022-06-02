@@ -1,0 +1,68 @@
+# {{ ansible_managed }}:  LOCAL CHANGES WILL BE OVERWRITTEN
+# Last run from:  {{ template_host }}
+# Template Path:  {{ template_path }}
+
+# Last Modified: Thu May 26 14:10:29 2022
+#include <tunables/global>
+
+# vim:syntax=apparmor
+# AppArmor policy for snmpd
+# ###AUTHOR###
+# ###COPYRIGHT###
+# ###COMMENT###
+# No template variables specified
+
+
+/usr/sbin/snmpd flags=(complain) {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+
+  capability dac_read_search,
+  capability net_admin,
+
+  network netlink dgram,
+
+  /bin/bash mrUx,
+  /bin/dash mrUx,
+  /dev/mapper/ r,
+  /etc/*.allow r,
+  /etc/*.deny r,
+  /etc/sensors.d/ r,
+  /etc/sensors3.conf r,
+  /etc/snmp/snmpd.conf r,
+  /proc/*/net/arp r,
+  /proc/*/net/dev r,
+  /proc/*/net/dev_snmp6/ r,
+  /proc/*/net/dev_snmp6/* r,
+  /proc/*/net/if_inet6 r,
+  /proc/*/net/ipv6_route r,
+  /proc/*/net/netstat r,
+  /proc/*/net/snmp r,
+  /proc/*/net/snmp6 r,
+  /proc/diskstats r,
+  /proc/partitions r,
+  /proc/sys/net/ipv4/conf/all/forwarding r,
+  /proc/sys/net/ipv4/ip_default_ttl r,
+  /proc/sys/net/ipv4/neigh/*/retrans_time_ms r,
+  /proc/sys/net/ipv6/conf/*/forwarding r,
+  /proc/sys/net/ipv6/neigh/*/base_reachable_time_ms r,
+  /proc/sys/net/ipv6/neigh/*/retrans_time_ms r,
+  /proc/vmstat r,
+  /sys/class/hwmon/ r,
+  /sys/class/i2c-adapter/ r,
+  /sys/devices/pci0000:00/0000:00:02.0/*/name r,
+  /sys/devices/pci0000:00/0000:00:02.0/drm/card0/card0-DP-1/i2c-3/name r,
+  /sys/devices/pci0000:00/0000:00:1c.3/0000:05:00.0/device r,
+  /sys/devices/pci0000:00/0000:00:1c.3/0000:05:00.0/vendor r,
+  /sys/devices/platform/coretemp.0/hwmon/hwmon1/ r,
+  /sys/devices/platform/coretemp.0/hwmon/hwmon1/name r,
+  /sys/devices/platform/eeepc-wmi/hwmon/hwmon2/ r,
+  /sys/devices/platform/eeepc-wmi/hwmon/hwmon2/name r,
+  /sys/devices/virtual/hwmon/hwmon0/ r,
+  /sys/devices/virtual/hwmon/hwmon0/name r,
+  /usr/share/misc/*.ids r,
+  /usr/share/snmp/mibs/ r,
+  /var/lib/**.conf rw,
+
+}
+
