@@ -28,7 +28,7 @@
     update_cache: yes
     state: latest
 
-- name: Install Observium support and prerequisite packages
+- name: Install Observium prerequisite packages
   apt:
     name:
       - wget
@@ -36,10 +36,200 @@
       - gnupg2
       - snmp
       - snmp-mibs-downloader
+      - software-properties-common
     state: latest
     install_recommends: yes
     update_cache: yes
   become: true
   when: ansible_distribution == 'Ubuntu'
 
+- name: Install Observium package dependencies
+  apt:
+    name:
+      - apache2-bin
+      - apache2-data
+      - apache2-utils
+      - fontconfig
+      - fontconfig-config
+      - fonts-dejavu-core
+      - fonts-droid-fallback
+      - fonts-liberation
+      - fonts-noto-mono
+      - fonts-urw-base35
+      - freeipmi-common
+      - ghostscript
+      - gsfonts
+      - hicolor-icon-theme
+      - imagemagick-6-common
+      - imagemagick-6.q16
+      - libaio1
+      - libann0
+      - libaom3
+      - libapr1
+      - libaprutil1
+      - libaprutil1-dbd-sqlite3
+      - libaprutil1-ldap
+      - libavahi-client3
+      - libavahi-common-data
+      - libavahi-common3
+      - libcairo2
+      - libcdt5
+      - libcgi-fast-perl
+      - libcgi-pm-perl
+      - libcgraph6
+      - libclone-perl
+      - libcups2
+      - libdatrie1
+      - libdav1d5
+      - libdbi1
+      - libde265-0
+      - libdeflate0
+      - libdjvulibre-text
+      - libdjvulibre21
+      - libencode-locale-perl
+      - libfcgi-bin
+      - libfcgi-perl
+      - libfcgi0ldbl
+      - libfftw3-double3
+      - libfontconfig1
+      - libfreeipmi17
+      - libgd3
+      - libgomp1
+      - libgraphite2-3
+      - libgs9
+      - libgs9-common
+      - libgts-0.7-5
+      - libgts-bin
+      - libgvc6
+      - libgvpr2
+      - libharfbuzz0b
+      - libheif1
+      - libhtml-parser-perl
+      - libhtml-tagset-perl
+      - libhtml-template-perl
+      - libhttp-date-perl
+      - libhttp-message-perl
+      - libice6
+      - libidn12
+      - libijs-0.35
+      - libilmbase25
+      - libio-html-perl
+      - libjansson4
+      - libjbig0
+      - libjbig2dec0
+      - libjpeg-turbo8
+      - libjpeg8
+      - libjxr-tools
+      - libjxr0
+      - liblab-gamut1
+      - liblcms2-2
+      - liblqr-1-0
+      - libltdl7
+      - liblua5.3-0
+      - liblwp-mediatypes-perl
+      - libmagickcore-6.q16-6
+      - libmagickcore-6.q16-6-extra
+      - libmagickwand-6.q16-6
+      - libmecab2
+      - libmysqlclient21
+      - libnetpbm10
+      - libnuma1
+      - libonig5
+      - libopenexr25
+      - libopenipmi0
+      - libopenjp2-7
+      - libpango-1.0-0
+      - libpangocairo-1.0-0
+      - libpangoft2-1.0-0
+      - libpaper-utils
+      - libpaper1
+      - libpathplan4
+      - libpixman-1-0
+      - libprotobuf-lite23
+      - librrd8
+      - libserf-1-1
+      - libsm6
+      - libsvn1
+      - libthai-data
+      - libthai0
+      - libtiff5
+      - libtimedate-perl
+      - liburi-perl
+      - libutf8proc2
+      - libwebp7
+      - libwebpdemux2
+      - libwebpmux3
+      - libwmflite-0.2-7
+      - libx11-6
+      - libx11-data
+      - libx265-199
+      - libxau6
+      - libxaw7
+      - libxcb-render0
+      - libxcb-shm0
+      - libxcb1
+      - libxdmcp6
+      - libxext6
+      - libxmu6
+      - libxpm4
+      - libxrender1
+      - libxslt1.1
+      - libxt6
+      - mecab-ipadic
+      - mecab-ipadic-utf8
+      - mecab-utils
+      - mysql-client-8.0
+      - mysql-client-core-8.0
+      - mysql-common
+      - mysql-server-8.0
+      - mysql-server-core-8.0
+      - netpbm
+      - openipmi
+      - php-common
+      - php-xml
+      - php8.1-apcu
+      - php8.1-common
+      - php8.1-readline
+      - php8.1-xml
+      - poppler-data
+      - psmisc
+      - ssl-cert
+      - x11-common
+    state: latest
+    install_recommends: yes
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+  tags:
+    - never
 
+- name: Install Observium core package dependencies
+  apt:
+    name:
+      - apache2
+      - fping
+      - graphviz
+      - imagemagick
+      - ipmitool
+      - libapache2-mod-php8.1
+      - mtr-tiny
+      - mysql-client
+      - mysql-server
+      - php-apcu
+      - php-pear
+      - php8.1-bcmath
+      - php8.1-curl
+      - php8.1-gd
+      - php8.1-mbstring
+      - php8.1-mysql
+      - python-is-python3
+      - python3-mysqldb
+      - python3-pymysql
+      - rrdtool
+      - subversion
+      - whois
+    state: latest
+    install_recommends: yes
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
