@@ -1,0 +1,45 @@
+---
+- name: Install NTP prerequisite
+  apt:
+    name: ntp
+    state: latest
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Restart NTP services
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: ntp
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Remove ca-certificates for reinstallation
+  apt:
+    name: ca-certificates
+    state: absent
+
+- name: Reinstall ca-certificates
+  apt:
+    name: ca-certificates
+    update_cache: yes
+    state: latest
+
+- name: Install Observium support and prerequisite packages
+  apt:
+    name:
+      - wget
+      - curl
+      - gnupg2
+      - snmp
+      - snmp-mibs-downloader
+    state: latest
+    install_recommends: yes
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
+
