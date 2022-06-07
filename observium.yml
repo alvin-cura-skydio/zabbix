@@ -1,0 +1,4 @@
+---
+- hosts: observium_server
+  roles:
+    - observium

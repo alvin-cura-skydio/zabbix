@@ -1,6 +1,7 @@
 ---
-- name: Show facts for Zabbix servers and support hosts
+- name: Show facts (testing)
   hosts:
+    - observium_server
     - zabbix_agent
     - zabbix_server
     - zabbix_db
