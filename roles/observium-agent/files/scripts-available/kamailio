@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ -x "/usr/sbin/kamcmd" ]]
+then
+  echo '<<<app-kamailio>>>'
+  /usr/sbin/kamcmd stats.get_statistics all
+
+  exit
+fi
+
+kamctl=$(which kamctl)
+
+if [[ ! -x "$kamctl" ]]
+then
+        kamctl=/usr/local/sbin/kamctl
+fi
+
+if [[ -x "$kamctl" ]]
+then
+	echo '<<<app-kamailio>>>'
+	$kamctl fifo get_statistics all
+fi
+

@@ -12,7 +12,7 @@
   apt:
     name:
       - "{{ gpg.package }}"
-    state: latest
+    state: present
     update_cache: yes
   become: true
   when: ansible_distribution == 'Ubuntu'
@@ -39,7 +39,8 @@
 - name: Check for apparmor
   command: /usr/sbin/aa-status
   register: apparmor_check
-  failed_when: apparmor_check.rc > 1
+  #failed_when: apparmor_check.rc > 1
+  ignore_errors: yes
   changed_when: apparmor_check.rc == 0
   when:
     - ansible_distribution == 'Ubuntu'
@@ -68,7 +69,7 @@
     - apparmor_check.rc == 0
 
 - name: Parse Zabbix agent AppArmor template
-  command: /usr/sbin/apparmor_parser -r /etc/apparmor.d/usr.sbin.zabbix_agentd
+  command: /sbin/apparmor_parser -r /etc/apparmor.d/usr.sbin.zabbix_agentd
   register: apparmor_parser
   failed_when: apparmor_parser.rc != 0
   changed_when: apparmor_parser.rc == 0
@@ -80,6 +81,7 @@
   command: /usr/sbin/aa-complain zabbix_agentd
   become: true
   when:
+    - apparmor_check.rc == 0
     - apparmor_parser.rc == 0
 
 - name: Check ca-certificates version

@@ -1,33 +1,33 @@
-# {{ ansible_managed }}:  LOCAL CHANGES WILL BE OVERWRITTEN
-# Last run from:  {{ template_host }}
-# Template Path:  {{ template_path }}
-
-# Last Modified: Thu Jun  2 22:09:38 2022
-include <tunables/global>
+# Last Modified: Wed Jun  8 12:14:07 2022
+#include <tunables/global>
 
 # vim:syntax=apparmor
 # AppArmor policy for zabbix_agentd
 # ###AUTHOR###
+# ###{{ ansible_managed }}:  LOCAL CHANGES WILL BE OVERWRITTEN
+# ###Last run from:  {{ template_host }}
+# ###Template Path:  {{ template_path }}
 # ###COPYRIGHT###
 # ###COMMENT###
 # No template variables specified
 
 
 /usr/sbin/zabbix_agentd flags=(complain) {
-  include <abstractions/apache2-common>
-  include <abstractions/base>
-  include <abstractions/openssl>
+  #include <abstractions/apache2-common>
+  #include <abstractions/base>
+  #include <abstractions/openssl>
 
+  /etc/zabbix/*/ r,
   /etc/zabbix/zabbix_agentd.conf r,
-  /etc/zabbix/zabbix_agentd.d/ r,
   /etc/zabbix/zabbix_agentd.d/template_db_mysql.conf r,
   /usr/bin/dash Cx,
   owner /run/zabbix/* wk,
+  owner /var/log/zabbix-agent/* rw,
   owner /var/log/zabbix/* rw,
 
 
   profile /usr/bin/dash flags=(complain) {
-    include <abstractions/base>
+    #include <abstractions/base>
 
     network inet stream,
 

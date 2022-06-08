@@ -5,3 +5,4 @@ rajajain-desktop		ansible_connection=ssh		ansible_user=rajajain
 
 [linux_snmp_servers]
 mfg-logbox			ansible_connection=ssh		ansible_user=aircam
+zabbix-01			ansible_connection=ssh		ansible_user=alvincura

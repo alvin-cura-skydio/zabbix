@@ -1,0 +1,5 @@
+---
+- hosts: observium_agent
+  roles:
+    - observium-agent
+
