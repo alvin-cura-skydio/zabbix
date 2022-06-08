@@ -68,7 +68,7 @@
     - apparmor_check.rc == 0
 
 - name: Parse Zabbix agent AppArmor template
-  command: /usr/sbin/apparmor_parser -r /etc/apparmor.d/usr.sbin.zabbix_agentd
+  command: /sbin/apparmor_parser -r /etc/apparmor.d/usr.sbin.zabbix_agentd
   register: apparmor_parser
   failed_when: apparmor_parser.rc != 0
   changed_when: apparmor_parser.rc == 0

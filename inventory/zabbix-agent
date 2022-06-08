@@ -6,3 +6,4 @@ maas-db-02		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.1
 mfg-logbox		ansible_connection=ssh		ansible_user=aircam
 zabbix-db-01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.241
 zabbix-db-02		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.242
+saumyashah-desktop2	ansible_connection=ssh		ansible_user=root	ansible_host=10.100.26.112
