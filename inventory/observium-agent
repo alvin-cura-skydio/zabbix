@@ -1,0 +1,2 @@
+[observium_agent]
+zabbix-01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.231
