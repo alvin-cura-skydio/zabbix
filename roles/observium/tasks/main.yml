@@ -37,6 +37,7 @@
       - snmp
       - snmp-mibs-downloader
       - software-properties-common
+      - telnet
     state: latest
     install_recommends: yes
     update_cache: yes
