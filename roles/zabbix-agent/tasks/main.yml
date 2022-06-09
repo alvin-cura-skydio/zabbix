@@ -15,14 +15,16 @@
     state: present
     update_cache: yes
   become: true
-  when: ansible_distribution == 'Ubuntu'
-
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_hostname is not match("builder.*")
+    
 - name: Install prerequisite packages
   apt:
     name:
       - ntp
     state: latest
-    update_cache: yes
+    update_cache: no
   become: true
   when: ansible_distribution == 'Ubuntu'
 
@@ -54,7 +56,7 @@
       - apparmor-utils
       - apparmor-notify
     state: latest
-    update_cache: yes
+    update_cache: no
   become: true
   when:
     - apparmor_check.rc == 0
@@ -131,7 +133,7 @@
       - zabbix-agent
     state: latest
     install_recommends: yes
-    update_cache: yes
+    update_cache: no
   become: true
   when: ansible_distribution == 'Ubuntu'
 

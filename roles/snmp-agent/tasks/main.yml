@@ -8,7 +8,7 @@
     name:
       - ntp
     state: latest
-    update_cache: yes
+    update_cache: no
   become: true
   when: ansible_distribution == 'Ubuntu'
 
@@ -28,7 +28,7 @@
       - snmpd
     state: latest
     install_recommends: yes
-    update_cache: yes
+    update_cache: no
   become: true
   when: ansible_distribution == 'Ubuntu'
 
