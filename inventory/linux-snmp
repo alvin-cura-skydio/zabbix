@@ -7,3 +7,4 @@ rajajain-desktop		ansible_connection=ssh		ansible_user=rajajain
 mfg-logbox			ansible_connection=ssh		ansible_user=aircam
 builder5			ansible_connection=ssh		ansible_user=skydio
 builder6			ansible_connection=ssh		ansible_user=skydio
+zabbix-01			ansible_connection=ssh		ansible_user=alvincura
