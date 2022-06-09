@@ -42,10 +42,10 @@
   register: snmpd_conf_changed
   when: ansible_distribution == 'Ubuntu'
 
-- name: Copy distro script
+- name: Copy distro sh script
   ansible.builtin.copy:
     src: distro
-    dest: /usr/local/bin/distro
+    dest: /usr/local/bin/distro.sh
     mode: 0755
     force: no
   become: true
