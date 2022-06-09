@@ -19,8 +19,21 @@
 
   /etc/zabbix/*/ r,
   /etc/zabbix/zabbix_agentd.conf r,
-  /etc/zabbix/zabbix_agentd.d/template_db_mysql.conf r,
+  /etc/zabbix/zabbix_agentd.d/* r,
+  /lib/x86_64-linux-gnu/ld-*.so mr,
+  /proc/ r,
+  /proc/*/* r,
+  /proc/*/net/dev r,
+  /proc/cmdline r,
+  /proc/loadavg r,
+  /proc/sys/fs/file-max r,
+  /proc/sys/kernel/pid_max r,
+  /proc/version r,
+  /sys/devices/** r,
   /usr/bin/dash Cx,
+  /usr/bin/wc mrix,
+  /usr/bin/who mrix,
+  owner /proc/*/task/** r,
   owner /run/zabbix/* wk,
   owner /var/log/zabbix-agent/* rw,
   owner /var/log/zabbix/* rw,
@@ -36,4 +49,3 @@
 
   }
 }
-
