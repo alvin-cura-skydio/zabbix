@@ -1,5 +1,5 @@
 ---
 - hosts: observium_agent
   roles:
+    - snmp-agent
     - observium-agent
-
