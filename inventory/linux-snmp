@@ -1,5 +1,6 @@
 [linux_snmp_desktops]
 saumyashah-desktop		ansible_connection=ssh		ansible_user=saumyashah
+shreyasarora-desktop		ansible_connection=ssh		ansible_user=shreyasarora	ansible_host=10.100.26.189
 davidgonzalez-desktop		ansible_connection=ssh		ansible_user=davidgonzalez
 rajajain-desktop		ansible_connection=ssh		ansible_user=rajajain
 

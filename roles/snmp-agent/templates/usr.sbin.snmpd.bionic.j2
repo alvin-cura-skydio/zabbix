@@ -1,0 +1,73 @@
+# {{ ansible_managed }}:  LOCAL CHANGES WILL BE OVERWRITTEN
+# Last run from:  {{ template_host }}
+# Template Path:  {{ template_path }}
+# Last Modified: Sat Jun 11 18:38:08 2022
+#include <tunables/global>
+
+# vim:syntax=apparmor
+# AppArmor policy for snmpd
+# ###AUTHOR###
+# ###COPYRIGHT###
+# ###COMMENT###
+# No template variables specified
+
+
+/usr/sbin/snmpd flags=(complain) {
+  #include <abstractions/base>
+  #include <abstractions/bash>
+  #include <abstractions/evince>
+  #include <abstractions/nameservice>
+  #include <abstractions/wutmp>
+
+  capability dac_read_search,
+  capability net_admin,
+
+  network netlink dgram,
+
+  /bin/bash mrUx,
+  /bin/dash mrUx,
+  /dev/mapper/ r,
+  /etc/*.allow r,
+  /etc/*.deny r,
+  /etc/sensors.d/ r,
+  /etc/sensors3.conf r,
+  /etc/snmp/snmpd.conf r,
+  /lib/x86_64-linux-gnu/ld-*.so mr,
+  /proc/ r,
+  /proc/*/cmdline r,
+  /proc/*/net/arp r,
+  /proc/*/net/dev r,
+  /proc/*/net/dev_snmp6/ r,
+  /proc/*/net/dev_snmp6/* r,
+  /proc/*/net/if_inet6 r,
+  /proc/*/net/ipv6_route r,
+  /proc/*/net/netstat r,
+  /proc/*/net/snmp r,
+  /proc/*/net/snmp6 r,
+  /proc/*/net/tcp r,
+  /proc/*/net/tcp6 r,
+  /proc/*/net/udp r,
+  /proc/*/stat r,
+  /proc/cmdline r,
+  /proc/diskstats r,
+  /proc/loadavg r,
+  /proc/partitions r,
+  /proc/sys/net/** r,
+  /proc/sys/net/ipv4/neigh/*/retrans_time_ms r,
+  /proc/sys/net/ipv6/conf/*/forwarding r,
+  /proc/sys/net/ipv6/neigh/*/base_reachable_time_ms r,
+  /proc/sys/net/ipv6/neigh/*/retrans_time_ms r,
+  /proc/uptime r,
+  /proc/vmstat r,
+  /sys/class/hwmon/ r,
+  /sys/class/i2c-adapter/ r,
+  /sys/devices/** r,
+  /sys/devices/pci0000:00/0000:00:02.0/*/name r,
+  /sys/devices/pci0000:00/0000:00:02.0/drm/card0/card0-DP-1/i2c-3/name r,
+  /sys/devices/pci0000:00/0000:00:1c.3/0000:05:00.0/device r,
+  /sys/devices/pci0000:00/0000:00:1c.3/0000:05:00.0/vendor r,
+  /usr/local/bin/distro.sh mrix,
+  /usr/share/misc/*.ids r,
+  /var/lib/**.conf rw,
+
+}

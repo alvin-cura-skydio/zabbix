@@ -3,7 +3,7 @@
   set_fact:
     gpg: "{{ xenial_defaults if ansible_distribution_version == '16.04' else current_defaults }}"
 
-- name: Install prerequisite packages
+- name: Install prerequisite packages (all)
   apt:
     name:
       - ntp
@@ -11,6 +11,17 @@
     update_cache: no
   become: true
   when: ansible_distribution == 'Ubuntu'
+
+- name: Install prerequisite packages (osver > 16.04)
+  apt:
+    name:
+      - apparmor-utils
+    state: latest
+    update_cache: no
+  become: true
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version is version('18.04', '>')
 
 - name: Restart NTP services
   ansible.builtin.systemd:
