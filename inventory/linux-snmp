@@ -13,4 +13,5 @@ builder4			ansible_connection=ssh		ansible_user=skydio
 builder5			ansible_connection=ssh		ansible_user=skydio
 builder6			ansible_connection=ssh		ansible_user=skydio
 builder7			ansible_connection=ssh		ansible_user=skydio
+builder8			ansible_connection=ssh		ansible_user=skydio		ansible_host=10.100.104.8
 zabbix-01			ansible_connection=ssh		ansible_user=alvincura
