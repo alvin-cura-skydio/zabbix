@@ -1,3 +1,4 @@
 [mysql_servers]
+zabbix-temp		ansible_connection=ssh		ansible_user=it		ansible_host=10.100.117.231
 zabbix-db-01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.241
 zabbix-db-02		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.242
