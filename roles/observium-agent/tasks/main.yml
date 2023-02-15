@@ -63,8 +63,10 @@
     group: root
   when: ansible_distribution == 'Ubuntu'
 
-- name: Restart xinetd with observium_agent
+- name: Restart snmpd and xinetd with observium_agent
   ansible.builtin.systemd:
-    name: xinetd
+    name:
+      - snmpd
+      - xinetd
     state: restarted
     daemon_reload: true
