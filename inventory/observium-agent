@@ -1,12 +1,17 @@
 [observium_agent]
-zabbix-01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.231
-mfg-logbox		ansible_connection=ssh		ansible_user=aircam
-builder1		ansible_connection=ssh		ansible_user=skydio
-builder2		ansible_connection=ssh		ansible_user=skydio
-builder3		ansible_connection=ssh		ansible_user=skydio	ansible_host=10.100.25.201
-builder4		ansible_connection=ssh		ansible_user=skydio
-builder5		ansible_connection=ssh		ansible_user=skydio
-builder6		ansible_connection=ssh		ansible_user=skydio
-builder7		ansible_connection=ssh		ansible_user=skydio
-builder8		ansible_connection=ssh		ansible_user=skydio	ansible_host=10.100.104.8
-it-xen01        ansible_connection=ssh  ansible_user=ubuntu
+zabbix-01		ansible_user=alvincura	ansible_host=10.100.104.231
+mfg-logbox		ansible_user=aircam
+builder1		ansible_user=skydio
+builder2		ansible_user=skydio
+builder3		ansible_user=skydio	ansible_host=10.100.25.201
+builder4		ansible_user=skydio
+builder5		ansible_user=skydio
+builder6		ansible_user=skydio
+builder7		ansible_user=skydio
+builder8		ansible_user=skydio	ansible_host=10.100.104.8
+it-lxd01                ansible_user=ubuntu
+it-lxd05                ansible_host=10.100.127.105
+
+[observium_agent:vars]
+ansible_connection=ssh
+ansible_user=it
