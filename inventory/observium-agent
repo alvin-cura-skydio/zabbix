@@ -9,7 +9,7 @@ builder5		ansible_user=skydio
 builder6		ansible_user=skydio
 builder7		ansible_user=skydio
 builder8		ansible_user=skydio	ansible_host=10.100.104.8
-it-lxd01                ansible_user=ubuntu
+it-lxd02                ansible_host=10.100.127.102
 it-lxd05                ansible_host=10.100.127.105
 
 [observium_agent:vars]
