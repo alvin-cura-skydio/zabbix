@@ -13,6 +13,7 @@ builder9		ansible_user=skydio	ansible_host=10.100.32.149
 it-lxd02                ansible_host=10.100.127.102
 it-lxd04                ansible_host=10.100.127.104
 it-lxd05                ansible_host=10.100.127.105
+it-lxd06                ansible_host=10.100.27.106
 it-postgresql-01
 it-postgresql-02
 it-mysql-01
