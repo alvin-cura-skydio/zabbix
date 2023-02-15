@@ -1,18 +1,22 @@
 [zabbix_agent]
-builder1		ansible_connection=ssh		ansible_user=skydio
-builder2		ansible_connection=ssh		ansible_user=skydio
-builder3		ansible_connection=ssh		ansible_user=skydio	ansible_host=10.100.25.201
-builder4		ansible_connection=ssh		ansible_user=skydio
-builder5		ansible_connection=ssh		ansible_user=skydio
-builder6		ansible_connection=ssh		ansible_user=skydio
-builder7		ansible_connection=ssh		ansible_user=skydio
-builder8		ansible_connection=ssh		ansible_user=skydio	ansible_host=10.100.104.8
-it-jammy-xen01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.102
-maas-02			ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.222
-maas-db-02		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.251
-mfg-logbox		ansible_connection=ssh		ansible_user=aircam
-observium		ansible_connection=ssh		ansible_user=alvincura
-zabbix-db-01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.241
-zabbix-db-02		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.242
-saumyashah-desktop2	ansible_connection=ssh		ansible_user=root	ansible_host=10.100.26.112
-stevemo-desktop3	ansible_connection=ssh		ansible_user=root	ansible_host=10.100.25.137
+builder1		ansible_user=skydio
+builder2		ansible_user=skydio
+builder3		ansible_user=skydio	ansible_host=10.100.25.201
+builder4		ansible_user=skydio
+builder5		ansible_user=skydio
+builder6		ansible_user=skydio
+builder7		ansible_user=skydio
+builder8		ansible_user=skydio
+it-jammy-xen01		ansible_user=alvincura	ansible_host=10.100.104.102
+#maas-02			ansible_user=alvincura	ansible_host=10.100.104.222
+#maas-db-02		ansible_user=alvincura	ansible_host=10.100.104.251
+#mfg-logbox		ansible_user=aircam
+observium		ansible_user=it
+zabbix-db-01		ansible_user=alvincura	ansible_host=10.100.104.241
+zabbix-db-02		ansible_user=alvincura	ansible_host=10.100.104.242
+saumyashah-desktop2	ansible_user=root	ansible_host=10.100.26.112
+stevemo-desktop3	ansible_user=root	ansible_host=10.100.25.137
+
+[zabbix_agent:vars]
+ansible_connection=ssh
+ansible_user=it

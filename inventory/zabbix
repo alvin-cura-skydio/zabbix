@@ -1,5 +1,5 @@
 [zabbix_server]
-zabbix-01		ansible_connection=ssh		ansible_user=alvincura	ansible_host=10.100.104.231
+#zabbix-01		ansible_user=alvincura	ansible_host=10.100.104.231
 zabbix-temp		ansible_user=it		ansible_host=10.100.127.231
 
 

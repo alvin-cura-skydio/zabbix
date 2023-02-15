@@ -1,14 +1,15 @@
 [observium_agent]
-zabbix-01		ansible_user=alvincura	ansible_host=10.100.104.231
-mfg-logbox		ansible_user=aircam
+zabbix-01		ansible_host=10.100.127.231
+#mfg-logbox		ansible_user=aircam
 builder1		ansible_user=skydio
 builder2		ansible_user=skydio
-builder3		ansible_user=skydio	ansible_host=10.100.25.201
+#builder3		ansible_user=skydio
 builder4		ansible_user=skydio
 builder5		ansible_user=skydio
 builder6		ansible_user=skydio
 builder7		ansible_user=skydio
-builder8		ansible_user=skydio	ansible_host=10.100.104.8
+builder8		ansible_user=skydio	ansible_host=10.100.32.139
+builder9		ansible_user=skydio	ansible_host=10.100.32.149
 it-lxd02                ansible_host=10.100.127.102
 it-lxd04                ansible_host=10.100.127.104
 it-lxd05                ansible_host=10.100.127.105

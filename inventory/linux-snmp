@@ -1,17 +1,24 @@
 [linux_snmp_desktops]
-saumyashah-desktop		ansible_connection=ssh		ansible_user=saumyashah
-shreyasarora-desktop		ansible_connection=ssh		ansible_user=shreyasarora	ansible_host=10.100.26.189
-davidgonzalez-desktop		ansible_connection=ssh		ansible_user=davidgonzalez
-rajajain-desktop		ansible_connection=ssh		ansible_user=rajajain
+saumyashah-desktop		ansible_user=saumyashah
+shreyasarora-desktop		ansible_user=shreyasarora	ansible_host=10.100.26.189
+davidgonzalez-desktop		ansible_user=davidgonzalez
+rajajain-desktop		ansible_user=rajajain
 
 [linux_snmp_servers]
-mfg-logbox			ansible_connection=ssh		ansible_user=aircam
-builder1			ansible_connection=ssh		ansible_user=skydio
-builder2			ansible_connection=ssh		ansible_user=skydio
-builder3			ansible_connection=ssh		ansible_user=skydio		ansible_host=10.100.25.201
-builder4			ansible_connection=ssh		ansible_user=skydio
-builder5			ansible_connection=ssh		ansible_user=skydio
-builder6			ansible_connection=ssh		ansible_user=skydio
-builder7			ansible_connection=ssh		ansible_user=skydio
-builder8			ansible_connection=ssh		ansible_user=skydio		ansible_host=10.100.104.8
-zabbix-01			ansible_connection=ssh		ansible_user=alvincura
+mfg-logbox			ansible_user=aircam
+builder1			ansible_user=skydio
+builder2			ansible_user=skydio
+builder3			ansible_user=skydio		ansible_host=10.100.25.201
+builder4			ansible_user=skydio
+builder5			ansible_user=skydio
+builder6			ansible_user=skydio
+builder7			ansible_user=skydio
+builder8			ansible_user=skydio
+zabbix-01			ansible_user=it                 ansible_host=10.100.127.231
+
+[linux_snmp:children]
+linux_snmp_desktops
+linux_snmp_servers
+
+[linux_snmp:vars]
+ansible_connection=ssh
