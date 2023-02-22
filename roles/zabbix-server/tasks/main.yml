@@ -69,13 +69,13 @@
 
 - name: Retrieve Zabbix release package
   get_url:
-    url: https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-1+ubuntu20.04_all.deb
-    dest: /tmp/zabbix-release_6.0-1+ubuntu20.04_all.deb
+    url: https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4+ubuntu22.04_all.deb
+    dest: /tmp/zabbix-release_6.0-4+ubuntu22.04_all.deb
   when: zabbix_check_deb.rc == 1
 
 - name: Install Zabbix release package
   apt:
-    deb: /tmp/zabbix-release_6.0-1+ubuntu20.04_all.deb
+    deb: /tmp/zabbix-release_6.0-4+ubuntu22.04_all.deb
   when: zabbix_check_deb.rc == 1
 
 - name: Add Zabbix Public Signing Key
@@ -91,6 +91,7 @@
       - zabbix-nginx-conf
       - zabbix-get
       - zabbix-agent
+      - zabbix-sql-scripts
     state: latest
     install_recommends: yes
     update_cache: yes

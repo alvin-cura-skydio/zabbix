@@ -24,6 +24,7 @@ maas-rack-vlan56-01
 maas-rack-vlan56-02
 maas-rack-vlan120-01
 maas-rack-vlan120-02
+alvincura-desktop2      ansible_user=alvincura
 
 [observium_agent:vars]
 ansible_connection=ssh

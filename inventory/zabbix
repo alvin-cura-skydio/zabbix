@@ -1,6 +1,8 @@
 [zabbix_server]
 #zabbix-01		ansible_user=alvincura	ansible_host=10.100.104.231
 zabbix-temp		ansible_user=it		ansible_host=10.100.127.231
+zabbix-01		ansible_user=it		ansible_host=10.100.40.131
+zabbix-02		ansible_user=it		ansible_host=10.100.40.231
 
 
 [zabbix_server:vars]
