@@ -8,6 +8,7 @@ builder6		ansible_user=skydio
 builder7		ansible_user=skydio
 builder8		ansible_user=skydio
 it-jammy-xen01		ansible_user=alvincura	ansible_host=10.100.104.102
+it-kiosk
 #maas-02			ansible_user=alvincura	ansible_host=10.100.104.222
 #maas-db-02		ansible_user=alvincura	ansible_host=10.100.104.251
 #mfg-logbox		ansible_user=aircam
