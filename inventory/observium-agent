@@ -10,6 +10,8 @@ builder6		ansible_user=skydio
 builder7		ansible_user=skydio
 builder8		ansible_user=skydio	ansible_host=10.100.32.139
 builder9		ansible_user=skydio	ansible_host=10.100.32.149
+hay-zbx-proxy-01
+hay-zbx-proxy-beta
 it-kiosk
 it-lxd02                ansible_host=10.100.127.102
 it-lxd03                ansible_host=10.100.127.103
