@@ -20,8 +20,10 @@ it-lxd05                ansible_host=10.100.127.105
 it-lxd06                ansible_host=10.100.27.106
 it-mysql-01
 it-mysql-02
+it-mysql-03
 it-postgresql-01
 it-postgresql-02
+it-postgresql-04
 maas-region-01
 maas-region-02
 maas-rack-vlan56-01
