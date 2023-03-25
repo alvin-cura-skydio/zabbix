@@ -55,6 +55,7 @@
       - gnupg2
       - snmp
       - snmp-mibs-downloader
+      - snmptt
     state: latest
     install_recommends: yes
     update_cache: yes
