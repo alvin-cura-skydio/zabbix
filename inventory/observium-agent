@@ -12,6 +12,7 @@ builder8		ansible_user=skydio	ansible_host=10.100.32.139
 builder9		ansible_user=skydio	ansible_host=10.100.32.149
 hay-zbx-proxy-01
 hay-zbx-proxy-beta
+it-iperf3-01            ansible_host=it-iperf3-01.maas.skydio.lan
 it-kiosk
 it-kiosk-02             ansible_host=it-kiosk-02.skydio.lan
 it-lxd02                ansible_host=10.100.127.102
