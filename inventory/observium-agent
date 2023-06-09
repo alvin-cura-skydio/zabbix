@@ -35,6 +35,7 @@ maas-rack-vlan120-02
 zabbix-beta
 zfs-mm01                ansible_host=zfs-mm01.skydio.lan
 alvincura-desktop2      ansible_user=alvincura
+it-lxd06-pikvm          ansible_user=root ansible_host=it-lxd06-pikvm.skydio.lan ansible_connection=ssh
 
 [observium_agent:vars]
 ansible_connection=ssh
