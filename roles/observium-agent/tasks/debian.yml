@@ -1,0 +1,93 @@
+---
+- name: Install NTP prerequisite
+  apt:
+    name: ntp
+    state: present
+  become: true
+  when: ansible_distribution_file_variety == 'Debian'
+
+- name: Restart NTP services
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: ntp
+  become: true
+  when: ansible_distribution_file_variety == 'Debian'
+
+- name: Install Observium Agent prerequisite packages (Ubuntu/Debian/Mint)
+  ansible.builtin.apt:
+    name:
+      - wget
+      - curl
+      - xinetd
+    state: latest
+    install_recommends: yes
+    update_cache: no
+  become: true
+  when: ansible_distribution_file_variety == 'Debian'
+
+- name: Install Observium Agent prerequisite packages (CentOS/RedHat/RockyLinux/Fedora)
+  ansible.builtin.dnf:
+    name:
+      - wget
+      - curl
+      - xinetd
+    state: latest
+    update_cache: no
+  become: true
+  when: ansible_distribution_file_variety == 'RedHat'
+
+- name: Install Observium Agent xinetd configuration
+  ansible.builtin.template:
+    src: observium_agent_xinetd.j2
+    dest: /etc/xinetd.d/observium_agent_xinetd
+    backup: no
+  become: true
+
+- name: Restart xinetd with Observium Agent
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: xinetd
+  become: true
+  when:
+    ansible_distribution_file_variety == 'Debian' or
+    ansible_distribution_file_variety == 'RedHat'
+
+- name: Install Observium Linux Agent
+  ansible.builtin.copy:
+    src: observium_agent
+    dest: /usr/bin/observium_agent
+    mode: 0755
+    owner: root
+    group: root
+  when:
+    ansible_distribution_file_variety == 'Debian' or
+    ansible_distribution_file_variety == 'RedHat'
+
+- name: Install Observium Linux Agent Scripts
+  ansible.builtin.copy:
+    src: scripts-available
+    dest: /usr/lib/observium_agent/
+    mode: 0755
+    owner: root
+    group: root
+  when:
+    ansible_distribution_file_variety == 'Debian' or
+    ansible_distribution_file_variety == 'RedHat'
+
+- name: Restart snmpd and xinetd with observium_agent
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+    daemon_reload: true
+  with_items:
+    - snmpd
+    - xinetd
+  when:
+    ansible_distribution_file_variety == 'Debian' or
+    ansible_distribution_file_variety == 'RedHat'

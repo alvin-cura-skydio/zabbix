@@ -1,0 +1,51 @@
+---
+- name: Install Observium Agent prerequisite packages
+  community.general.pacman:
+    name:
+      - wget
+      - curl
+      - xinetd
+    state: latest
+    update_cache: yes
+  become: true
+
+- name: Install Observium Agent xinetd configuration
+  ansible.builtin.template:
+    src: observium_agent_xinetd.j2
+    dest: /etc/xinetd.d/observium_agent_xinetd
+    backup: no
+  become: true
+
+- name: Restart xinetd with Observium Agent
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: xinetd
+  become: true
+
+- name: Install Observium Linux Agent
+  ansible.builtin.copy:
+    src: observium_agent
+    dest: /usr/bin/observium_agent
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Install Observium Linux Agent Scripts
+  ansible.builtin.copy:
+    src: scripts-available
+    dest: /usr/lib/observium_agent/
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Restart snmpd and xinetd with observium_agent
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+    daemon_reload: true
+  with_items:
+    - snmpd
+    - xinetd
