@@ -1,27 +1,11 @@
 ---
-- name: Install NTP prerequisite
-  apt:
-    name: ntp
-    state: present
-  become: true
-
-- name: Restart NTP services
-  ansible.builtin.systemd:
-    state: started
-    daemon_reload: yes
-    enabled: yes
-    masked: no
-    name: ntp
-  become: true
-
 - name: Install Observium Agent prerequisite packages
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - wget
       - curl
       - xinetd
     state: latest
-    install_recommends: yes
     update_cache: no
   become: true
 
