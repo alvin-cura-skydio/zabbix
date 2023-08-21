@@ -1,7 +1,8 @@
 [observium_agent]
 zabbix-01		ansible_host=10.100.127.231
 #mfg-logbox		ansible_user=aircam
-builder1		ansible_user=skydio
+buildbarn01
+#builder1		ansible_user=skydio
 builder2		ansible_user=skydio
 #builder3		ansible_user=skydio
 builder4		ansible_user=skydio
@@ -16,7 +17,8 @@ hay-zbx-proxy-beta
 it-iperf3-01            ansible_host=it-iperf3-01.maas.skydio.lan
 it-kiosk
 it-kiosk-02             ansible_host=it-kiosk-02.skydio.lan
-it-lxd02                ansible_host=10.100.127.102
+it-lxd01                ansible_host=it-lxd01.skydio.lan
+it-lxd02                ansible_host=it-lxd02.skydio.lan
 it-lxd03                ansible_host=10.100.127.103
 it-lxd04                ansible_host=10.100.127.104
 it-lxd05                ansible_host=10.100.127.105
